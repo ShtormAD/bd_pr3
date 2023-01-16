@@ -7,6 +7,7 @@ namespace pr3
 {
     class DBUtils
     {
+        private static String database;
         //Создаем подключение
         public static MySqlConnection GetDBConnection()
         {
@@ -14,7 +15,7 @@ namespace pr3
             {
                 string host = "shtormad.keenetic.pro";
                 int port = 2205;
-                string database = "mydb";
+                database = "mydb";
                 string username = "remote_user";
                 string password = "remUsrPass";
 
@@ -47,7 +48,7 @@ namespace pr3
                 //Перегоняем в массив и возвращаем
                 while (reader.Read())
                 {
-                    res.Add(reader.GetString("Tables_in_mydb"));
+                    res.Add(reader.GetString("Tables_in_"+database));
                 }
                 reader.Close();
                 return res.ToArray();
