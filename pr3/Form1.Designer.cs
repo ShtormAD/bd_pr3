@@ -35,6 +35,10 @@
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_del = new System.Windows.Forms.Button();
+            this.btn_id_mode_change = new System.Windows.Forms.Button();
+            this.btn_exp_xml = new System.Windows.Forms.Button();
+            this.btn_exp_html = new System.Windows.Forms.Button();
+            this.btn_exp_excel = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +65,7 @@
             this.cb_tables.FormattingEnabled = true;
             this.cb_tables.Location = new System.Drawing.Point(12, 12);
             this.cb_tables.Name = "cb_tables";
-            this.cb_tables.Size = new System.Drawing.Size(179, 21);
+            this.cb_tables.Size = new System.Drawing.Size(153, 21);
             this.cb_tables.TabIndex = 1;
             this.cb_tables.SelectedIndexChanged += new System.EventHandler(this.cb_tables_SelectedIndexChanged);
             // 
@@ -80,7 +84,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(197, 12);
+            this.btn_add.Location = new System.Drawing.Point(171, 12);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(75, 23);
             this.btn_add.TabIndex = 3;
@@ -90,7 +94,7 @@
             // 
             // btn_edit
             // 
-            this.btn_edit.Location = new System.Drawing.Point(278, 12);
+            this.btn_edit.Location = new System.Drawing.Point(252, 12);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(75, 23);
             this.btn_edit.TabIndex = 4;
@@ -100,7 +104,7 @@
             // 
             // btn_del
             // 
-            this.btn_del.Location = new System.Drawing.Point(359, 12);
+            this.btn_del.Location = new System.Drawing.Point(333, 12);
             this.btn_del.Name = "btn_del";
             this.btn_del.Size = new System.Drawing.Size(75, 23);
             this.btn_del.TabIndex = 5;
@@ -108,11 +112,56 @@
             this.btn_del.UseVisualStyleBackColor = true;
             this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
             // 
+            // btn_id_mode_change
+            // 
+            this.btn_id_mode_change.Location = new System.Drawing.Point(696, 12);
+            this.btn_id_mode_change.Name = "btn_id_mode_change";
+            this.btn_id_mode_change.Size = new System.Drawing.Size(75, 23);
+            this.btn_id_mode_change.TabIndex = 6;
+            this.btn_id_mode_change.Text = "id <-> текст";
+            this.btn_id_mode_change.UseVisualStyleBackColor = true;
+            this.btn_id_mode_change.Visible = false;
+            this.btn_id_mode_change.Click += new System.EventHandler(this.btn_id_mode_change_Click);
+            // 
+            // btn_exp_xml
+            // 
+            this.btn_exp_xml.Location = new System.Drawing.Point(414, 12);
+            this.btn_exp_xml.Name = "btn_exp_xml";
+            this.btn_exp_xml.Size = new System.Drawing.Size(75, 23);
+            this.btn_exp_xml.TabIndex = 7;
+            this.btn_exp_xml.Text = "Экспорт xml";
+            this.btn_exp_xml.UseVisualStyleBackColor = true;
+            this.btn_exp_xml.Click += new System.EventHandler(this.btn_exp_xml_Click);
+            // 
+            // btn_exp_html
+            // 
+            this.btn_exp_html.Location = new System.Drawing.Point(495, 12);
+            this.btn_exp_html.Name = "btn_exp_html";
+            this.btn_exp_html.Size = new System.Drawing.Size(79, 23);
+            this.btn_exp_html.TabIndex = 8;
+            this.btn_exp_html.Text = "Экспорт html";
+            this.btn_exp_html.UseVisualStyleBackColor = true;
+            this.btn_exp_html.Click += new System.EventHandler(this.btn_exp_html_Click);
+            // 
+            // btn_exp_excel
+            // 
+            this.btn_exp_excel.Location = new System.Drawing.Point(580, 12);
+            this.btn_exp_excel.Name = "btn_exp_excel";
+            this.btn_exp_excel.Size = new System.Drawing.Size(90, 23);
+            this.btn_exp_excel.TabIndex = 9;
+            this.btn_exp_excel.Text = "Экспорт Excel";
+            this.btn_exp_excel.UseVisualStyleBackColor = true;
+            this.btn_exp_excel.Click += new System.EventHandler(this.btn_exp_excel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 450);
+            this.Controls.Add(this.btn_exp_excel);
+            this.Controls.Add(this.btn_exp_html);
+            this.Controls.Add(this.btn_exp_xml);
+            this.Controls.Add(this.btn_id_mode_change);
             this.Controls.Add(this.btn_del);
             this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.btn_add);
@@ -141,6 +190,10 @@
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button btn_del;
+        private System.Windows.Forms.Button btn_id_mode_change;
+        private System.Windows.Forms.Button btn_exp_xml;
+        private System.Windows.Forms.Button btn_exp_html;
+        private System.Windows.Forms.Button btn_exp_excel;
     }
 }
 
