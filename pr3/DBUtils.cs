@@ -146,6 +146,61 @@ namespace pr3
                 return data;
             }
         }
+        public static List<String[]> LoadData(MySqlConnection conn, String table, String rl)
+        {
+            List<string[]> data = new List<string[]>();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                //Запрашиваем * из таблицы
+                string query = "SELECT * FROM " + table + " where full_name like '"+rl+"%';";
+                cmd.CommandText = query;
+                cmd.Connection = conn;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //Заполняем массив данными
+                int c = reader.FieldCount;
+                data.Add(new string[c]);
+                data.Add(new string[c]);
+                while (reader.Read())
+                {
+                    data.Add(new string[c]);
+                    for (int i = 0; i < c; i++)
+                    {
+                        //Проверяем ячейку на наличие даты, если да - форматируем под MySQL
+                        if (DateTime.TryParse(reader.GetString(i), out DateTime dt))
+                            data[data.Count - 1][i] = reader.GetDateTime(i).ToString("yyyy-MM-dd");
+                        else
+                            data[data.Count - 1][i] = reader.GetString(i);
+                    }
+                }
+                //Заполняем название колонок
+                for (int i = 0; i < c; i++)
+                {
+                    data[1][i] = reader.GetName(i).ToString();
+                }
+                reader.Close();
+
+                query = "SELECT col_name_lang FROM " + table + "_lang;";
+                cmd.CommandText = query;
+                reader = cmd.ExecuteReader();
+                int it = 0;
+                while (reader.Read())
+                {
+                    data[0][it] = reader.GetString(0);
+                    it++;
+                }
+                reader.Close();
+                return data;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("LoadData");
+                Console.WriteLine(e.Message);
+                showDial();
+                return data;
+            }
+        }
 
         //Удаление записи
         public static void delRow(MySqlConnection conn,int id, String tabl, String colN)
@@ -277,6 +332,52 @@ namespace pr3
             }
             catch (Exception e)
             {
+                showDial();
+                return data;
+            }
+        }
+
+        public static List<String[]> LoadStudCount(MySqlConnection conn, String group)
+        {
+            List<string[]> data = new List<string[]>();
+            try
+            {
+                //Запрашиваем * из таблицы
+                string query = "select students.full_name as 'Студент', count(*) as 'Взял книг' from exttraditions, students where students_id_student in (select id_student from students where groups_id_group = (select id_group from groupss where group_name like '" + group + "%')) " +
+                                    "and students.id_student in (select id_student from students where groups_id_group = (select id_group from groupss where group_name like '" + group + "%'));";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = conn;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                //Заполняем массив данными
+                int c = reader.FieldCount;
+                data.Add(new string[c]);
+                data.Add(new string[c]);
+                while (reader.Read())
+                {
+                    data.Add(new string[c]);
+                    for (int i = 0; i < c; i++)
+                    {
+                        //Проверяем ячейку на наличие даты, если да - форматируем под MySQL
+                        if (DateTime.TryParse(reader.GetString(i), out DateTime dt))
+                            data[data.Count - 1][i] = reader.GetDateTime(i).ToString("yyyy-MM-dd");
+                        else
+                            data[data.Count - 1][i] = reader.GetString(i);
+                        Console.WriteLine(reader.GetString(i));
+                    }
+                }
+                //Заполняем название колонок
+                for (int i = 0; i < c; i++)
+                {
+                    data[0][i] = reader.GetName(i).ToString();
+                }
+                reader.Close();
+                return data;
+            }
+            catch (Exception e)
+            {
+                 Console.WriteLine(e.Message);
                 showDial();
                 return data;
             }

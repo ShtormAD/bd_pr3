@@ -39,10 +39,15 @@ namespace pr3
         //При изменении выбранной таблицы
         private void cb_tables_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btn_id_mode_change.Visible = false;
+            textBox1.Visible = false;
+            textBox2.Visible = false;
             if (cb_tables.Text.Equals("Выдачи"))
                 btn_id_mode_change.Visible = true;
-            else
-                btn_id_mode_change.Visible = false;
+            else if (cb_tables.Text.Equals("Сотрудники"))
+                textBox1.Visible = true;
+            else if (cb_tables.Text.Equals("Студенты"))
+                textBox2.Visible = true;
             updateTable();
         }
 
@@ -83,6 +88,13 @@ namespace pr3
             if (cb_tables.Text.Equals("Выдачи") && id_mode)
             {
                 data = DBUtils.LoadExtr(conn);
+            } else if(cb_tables.Text.Equals("Сотрудники") && textBox1.Text.Length > 0)
+            {
+                data = DBUtils.LoadData(conn, tables[cb_tables.SelectedIndex], textBox1.Text);
+            }
+            else if (cb_tables.Text.Equals("Студенты") && textBox2.Text.Length > 0)
+            {
+                data = DBUtils.LoadStudCount(conn, textBox2.Text);
             }
             else
             {
@@ -300,6 +312,18 @@ namespace pr3
             //Вызываем нашу созданную эксельку.
             ExcelApp.Visible = true;
             ExcelApp.UserControl = true;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            updateTable();
+            textBox1.Select();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            updateTable();
+            textBox2.Select();
         }
     }
 }
